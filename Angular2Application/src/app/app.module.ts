@@ -5,7 +5,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
-import { DashBoardComponent } from './dash-board/dash-board.component';
 // tslint:disable-next-line:whitespace
 // tslint:disable-next-line:max-line-length
 import {MatCardModule,
@@ -33,7 +32,6 @@ import { FilterPipePipe } from '../assets/customPipes/filter-pipe.pipe';
   declarations: [
     AppComponent,
     RegisterComponent,
-    DashBoardComponent,
     FilterPipePipe
   ],
   imports: [
