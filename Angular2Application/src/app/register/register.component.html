@@ -1,0 +1,140 @@
+<br/>
+<br/>
+<div class="row">
+  <div class="container container-fluid">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h3>Registration Form</h3></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="RForm" (ngSubmit)="onRegister()">
+            <mat-form-field class="example-full-width" formGroupName="RFormControls">
+             <input type="text" matInput [(ngModel)]="firstName" placeholder="First Name" formControlName="FName"/>
+             <mat-error *ngIf="!RForm.get('RFormControls.FName').valid
+                               && RForm.get('RFormControls.FName').touched
+                               && RForm.get('RFormControls.FName').hasError('required')">
+               Please provide your First Name
+             </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" formGroupName="RFormControls">
+             <input type="text" matInput [(ngModel)]="lastName" placeholder="Last Name" formControlName='LName'/>
+             <mat-error *ngIf="!RForm.get('RFormControls.LName').valid
+                               && RForm.get('RFormControls.LName').touched
+                               && RForm.get('RFormControls.LName').hasError('required')">
+               Please provide your Last Name
+             </mat-error>
+            </mat-form-field>
+            <mat-form-field formGroupName="RFormControls" class="example-full-width">
+                <input type="text" matInput [(ngModel)]="email" placeholder="Email" formControlName='EmailAddress'/>
+                <mat-error *ngIf="!RForm.get('RFormControls.EmailAddress').valid
+                                  && RForm.get('RFormControls.EmailAddress').touched">
+                  <mat-error *ngIf="RForm.get('RFormControls.EmailAddress').hasError('required')">
+                  Please provide your Email Address
+                  </mat-error>
+                  <mat-error *ngIf="RForm.get('RFormControls.EmailAddress').hasError('email')">
+                Please provide a valid Email Address
+                </mat-error>
+                </mat-error>                
+            </mat-form-field>
+            <mat-form-field class="example-full-width" formGroupName="RFormControls">
+                <mat-select placeholder="Gender" formControlName="Gender">
+                  <mat-option *ngFor="let i of Genders" [value]="i">
+                    {{ i }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="!RForm.get('RFormControls.Gender').valid
+                            && RForm.get('RFormControls.Gender').touched">
+                  <mat-error *ngIf="RForm.get('RFormControls.Gender').hasError('required')">
+                    Please Select your Gender
+                  </mat-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="example-full-width" formGroupName="RFormControls">
+                  <input type="text" placeholder="Select Your Country" aria-label="Number" [(ngModel)]="SearchCountry" matInput formControlName="CountryName" [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let c of Countries |  filterPipe:SearchCountry" [value]="c.name">
+                      {{ c.name}}
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error *ngIf="!RForm.get('RFormControls.CountryName').valid
+                  && RForm.get('RFormControls.CountryName').touched">
+                  <mat-error *ngIf="RForm.get('RFormControls.CountryName').hasError('required')">
+                      Please Select your Country
+                      </mat-error>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" formGroupName="RFormControls">
+                    <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="DOB">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                    <mat-error *ngIf="!RForm.get('RFormControls.DOB').valid
+                    && RForm.get('RFormControls.DOB').touched">
+                    <mat-error *ngIf="RForm.get('RFormControls.DOB').hasError('required')">
+                        Please choose your date of birth
+                        </mat-error>
+                  </mat-error>
+                  </mat-form-field>   
+                  <mat-form-field formGroupName="RFormControls" class="example-full-width">
+                    <input matInput [(ngModel)]="CompanyName" placeholder="Company Name" formControlName="CompanyName">
+                    <mat-error *ngIf="!RForm.get('RFormControls.CompanyName').valid
+                    && RForm.get('RFormControls.CompanyName').touched">
+                    <mat-error *ngIf="RForm.get('RFormControls.CompanyName').hasError('required')">
+                        Please provide your Company
+                        </mat-error>
+                        </mat-error>
+                  </mat-form-field> 
+                  <div class="form-control" formGroupName="RFormControls">
+                  <textarea  class="form-control" type="text" placeholder="Introduce yourself" [(ngModel)]="AboutYourSelf" formControlName="AboutYou">                      
+                  </textarea>
+                  <span class="pull-right">{{AboutYourSelf.length + '/255'}}</span>
+                  <mat-error *ngIf="!RForm.get('RFormControls.AboutYou').valid
+                    && RForm.get('RFormControls.AboutYou').touched">
+                    <mat-error *ngIf="RForm.get('RFormControls.AboutYou').hasError('required')">
+                        About yourself is required
+                        </mat-error>
+                        <mat-error *ngIf="RForm.get('RFormControls.AboutYou').hasError('minlength')">
+                          About youself should be of minimum 150 characters
+                        </mat-error>
+                        <mat-error *ngIf="RForm.get('RFormControls.AboutYou').hasError('maxlength')">
+                           You reached the maximum limit of the characters.
+                        </mat-error>
+                        </mat-error>                                                
+                  </div>
+                  <br/>
+                   <div class="form-control">
+                     <label>Newsletter
+                     <mat-radio-group>
+                        <mat-radio-button  class="checkbox-inline" value="1">Yes</mat-radio-button>
+                        <mat-radio-button class="checkbox-inline" value="2">No</mat-radio-button>
+                      </mat-radio-group>
+                      </label>
+                   </div> 
+                   <div class="form-control">
+                      <label>Privacy
+                      <mat-radio-group>
+                         <mat-radio-button  class="checkbox-inline" value="1">Yes</mat-radio-button>
+                         <mat-radio-button class="checkbox-inline" value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                       </label>
+                    </div>   
+                    <br/> 
+                    <span formGroupName="RFormControls">                                      
+                        <mat-checkbox formControlName="Terms">Agree to terms and conditions</mat-checkbox>
+                        <mat-error *ngIf="!RForm.get('RFormControls.Terms').valid
+                    && RForm.get('RFormControls.Terms').touched">
+                    <mat-error *ngIf="RForm.get('RFormControls.Terms').hasError('required')">
+                        You have agree terms and conditions
+                        </mat-error>   
+                        </mat-error>
+                        </span>
+                        <div>
+                      <button class="Submit btn btn-primary" type="submit" [disabled]="!RForm.valid">Submit</button> 
+              </div>             
+          </form>
+        </mat-card-content>       
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<mat-sidenav-container class="angularHardcore-Container" fullscreen>
+  <mat-sidenav class="angularHardcore-Sidenav" #angularpracticeSidenav>
+    <mat-card>
+    <a routerLink="Register">Register</a>
+    </mat-card>   
+  </mat-sidenav>
+  <mat-toolbar color="primary" class="angular-sidenav-content">
+  <button class="btn btn-default" (click)="angularpracticeSidenav.toggle()">
+    <mat-icon>line_style</mat-icon>
+  </button>
+  &nbsp;
+Angular Application 
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+  </mat-sidenav-container>
